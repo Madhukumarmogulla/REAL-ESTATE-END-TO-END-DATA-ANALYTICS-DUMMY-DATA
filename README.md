@@ -151,6 +151,9 @@
 - Calculate simple metrics (e.g., Total_Expenses_Year vs. Rental_Income_USD).
 
 ---
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/b6a7be2f-24b4-4036-adfc-bca9f98dbd81" />
+<img width="995" height="517" alt="DATA MODELING REALESTATE" src="https://github.com/user-attachments/assets/bb3e60d0-b1ab-4edc-877d-5a689fc2ea5b" />
+
 
 
 
