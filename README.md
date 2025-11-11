@@ -14,3 +14,5 @@
 * **Problem to Solve with DW:** Identifying undervalued properties, predicting rental income trends, analyzing the impact of market changes on property values, comparing property performance across regions/types, optimizing tenant acquisition strategies.
 
 * **Example Queries:** "Which property types in specific zip codes have shown the highest appreciation in the last 5 years?", "What is the average ROI for residential properties acquired between 200k−400k in the last decade?", "How does average rental income correlate with local employment rates?", "Identify properties with consistently high maintenance costs relative to their income."
+
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/c27b53d4-e17c-46aa-85c0-689c1c890559" />
