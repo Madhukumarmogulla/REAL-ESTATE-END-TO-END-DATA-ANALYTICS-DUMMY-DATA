@@ -18,88 +18,139 @@
 <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/c27b53d4-e17c-46aa-85c0-689c1c890559" />
 
 ## The "Data Detective" Approach: How to Understand Your Data
+# Data Detective Approach for Real Estate Data
 
-Data Detective Approach · Real Estate Analytics
-Problem Overview
-PropertyInsights Inc. is a real estate investment firm focused on acquiring and managing residential and commercial properties. The objective is to enhance acquisition decision-making and optimize portfolio performance.
+## Problem Statement
 
-Phase 1: High-Level Scope
-Data Sources
-Property_Details: Asset mgmt or public records.
+**PropertyInsights Inc.** is a real estate investment firm that acquires and manages residential and commercial properties. The goal is to improve the decision-making process for new property acquisitions and optimize the performance of the existing portfolio.
 
-Transaction_History: Sales/acquisition logs.
+---
 
-Rental_Income: Property mgmt system.
+## Phase 1: High-Level Overview (The Big Picture)
 
-Property_Expenses: Accounting/expense tracking.
+### What is the Source?
 
-These are transactional and operational sources; expect detailed, low-level data.
+- **Clues:** Our dummy data implies various sources:
+  - `Property_Details` (likely from internal asset management or public records)
+  - `Transaction_History` (sales/acquisition records)
+  - `Rental_Income` (property management system)
+  - `Property_Expenses` (accounting/expense tracking)
 
-Subject Area
-Property acquisition, sales, rental yields, portfolio costs.
+- **Why it matters:** These are all transactional or descriptive operational systems. This means we can expect granular, possibly un-summarized data.
 
-Focus: Individual property performance, returns, market movement.
+### What is the Subject Area?
 
-Tables / Files Breakdown
-Table	Type	Description
-Property_Details	Dimension	Static info for each property
-Transaction_History	Fact	Acquisition & sales events
-Rental_Income	Fact	Periodic (usually monthly) rent performance
-Property_Expenses	Fact	Expense logs by property & time
-Categorizing tables guides the star (facts, dims) schema.
+- **Clues:** Property acquisition, sales, rental performance, property costs.
+- **Why it matters:** The core focus is on individual property performance, investment returns, and market trends.
 
-Table Relationships
-All tables join using Property_ID
+### What are the Tables/Files?
 
-Property_Details (Dimension) is the “one”, all others (“many”) are fact/event tables.
+| Table                | Type        | Description                                               |
+|----------------------|-------------|-----------------------------------------------------------|
+| Property_Details     | Dimension   | Descriptive table about individual properties.            |
+| Transaction_History  | Fact        | Event/fact table recording sales and acquisitions.        |
+| Rental_Income        | Fact        | Periodic fact table, likely monthly.                      |
+| Property_Expenses    | Fact        | Event/fact table, tracking various costs.                 |
 
-Phase 2: Deep Dive · Table Design and Cleaning
-Property_Details (Dimension)
-Column	Type	Actions/Validation
-Property_ID	Text	Must be unique. Investigate duplicates.
-Property_Type	Text	Normalize values; e.g., “Res.” → “Residential”.
-Address	Text	Trim whitespace.
-City	Text	Capitalize consistency.
-State	Text	Standardize codes, e.g., “Calif” → “CA”.
-Zip_Code	Text/Num	Keep as text if leading zeros.
-Sq_Footage	Number	Filter invalids/negatives.
-Built_Year	Number	Validate for realism; filter future/invalid.
-Num_Bedrooms	Number	0 for commercial is ok.
-Num_Bathrooms	Number	Whole (or decimal for halves).
-Zoning	Text	Clean up typos, fill missing.
-Transaction_History (Fact)
-Column	Type	Actions/Validation
-Transaction_ID	Text	Ensure uniqueness.
-Property_ID	Text	Foreign key.
-Transaction_Date	Date	Standard format, validate ranges.
-Transaction_Type	Text	Normalize values.
-Sale_Price_USD	Decimal	Filter unreasonable values.
-Buyer_Type	Text	Normalize.
-Rental_Income (Fact)
-Column	Type	Actions/Validation
-Rental_ID	Text	Must be unique.
-Property_ID	Text	Foreign key.
-Period_Month	Number	1–12 validation.
-Period_Year	Number	Recent years.
-Rental_Income_USD	Decimal	0 if vacant, no negatives.
-Occupancy_Status	Text	Normalize values.
-Vacancy_Days	Number	0 if occupied.
-Derived Date	Date	Combine Period_Month & Period_Year.
-Property_Expenses (Fact)
-Column	Type	Actions/Validation
-Expense_ID	Text	Unique, remove duplicates.
-Property_ID	Text	Foreign key.
-Expense_Date	Date	Consistency check.
-Expense_Type	Text	Normalize categories.
-Amount_USD	Decimal	Filter invalids/negatives.
-Vendor	Text	Normalize names.
-Phase 3: Context & Validation
-Reference documentation: e.g., Zoning, Property_Type, Expense_Type.
+- **Why it matters:** This initial categorization helps us think about star schema design (dimensions describe "what," facts describe "events/measurements").
 
-Ask domain experts: Clarify rules, calculations, expected values.
+### How are the Tables Related?
 
-Validation checks:
+- **Clues:** All tables seem to have `Property_ID`.
+- **Hypothesis:** `Property_ID` is the key that connects all these different aspects of a property's lifecycle. `Property_Details` will be the "one" side of a 1-to-many relationship with the other "many" fact tables.
 
-Compare with official reports.
+---
 
-Calculate and cross-verify totals (e.g., yearly income/expenses).
+## Phase 2: Deep Dive - Column by Column (The Details)
+
+### Table: Property_Details (Likely a Dimension Table: `Dim_Property`)
+
+| Column Name     | Data Type (Expected) | Questions & Observations                         | Action/Cleaning Strategy                                |
+|-----------------|----------------------|--------------------------------------------------|---------------------------------------------------------|
+| Property_ID     | Text                 | Is it unique? (Should be primary key).           | Verify 100% Unique, 100% Valid. Investigate duplicates. |
+| Property_Type   | Text                 | Variations (e.g., "Res.", "Comm.")?              | Normalize values, ensure Text type.                     |
+| Address         | Text                 | Free-form, any whitespace issues?                | Trim whitespace.                                        |
+| City            | Text                 | Case consistency?                                | Capitalize for consistency.                             |
+| State           | Text                 | Codes/full names/typos?                          | Normalize codes, ensure Text type.                      |
+| Zip_Code        | Text / Whole Number  | Leading zeros?                                   | Keep as Text if needed.                                 |
+| Sq_Footage      | Whole Number         | Range? Any negatives/zeros?                      | Filter/flag unreasonable values.                        |
+| Built_Year      | Whole Number         | Range? Future/very old/0?                        | Filter/flag invalid years.                              |
+| Num_Bedrooms    | Whole Number         | Range, commercial properties 0?                  | Zero for commercial expected.                           |
+| Num_Bathrooms   | Whole Number         | Whole/decimals for half-baths?                   | Decimal if half-bath present.                           |
+| Zoning          | Text                 | Typos/missing values?                            | Normalize, handle blanks.                               |
+
+---
+
+### Table: Transaction_History (Likely a Fact Table: `Fact_Transactions`)
+
+| Column Name        | Data Type (Expected) | Questions & Observations                               | Action/Cleaning Strategy                       |
+|--------------------|----------------------|--------------------------------------------------------|------------------------------------------------|
+| Transaction_ID     | Text                 | Unique? Primary key.                                   | Remove duplicates.                             |
+| Property_ID        | Text                 | All IDs valid with `Dim_Property`?                     | Ensure data type/validity.                     |
+| Transaction_Date   | Date                 | Format okay? Acquisition before sale?                  | Convert, validate range.                       |
+| Transaction_Type   | Text                 | Variations?                                            | Normalize values.                              |
+| Sale_Price_USD     | Decimal Number       | Range issues? Negatives?                               | Filter invalids.                               |
+| Buyer_Type         | Text                 | Consistent categories?                                 | Normalize values.                              |
+
+---
+
+### Table: Rental_Income (Likely a Fact Table: `Fact_Rental_Performance`)
+
+| Column Name        | Data Type (Expected) | Questions & Observations                               | Action/Cleaning Strategy                       |
+|--------------------|----------------------|--------------------------------------------------------|------------------------------------------------|
+| Rental_ID          | Text                 | Unique?                                                | Remove duplicates.                             |
+| Property_ID        | Text                 | All IDs valid?                                         | Ensure validity.                               |
+| Period_Month       | Whole Number         | 1-12?                                                  | Validate range.                                |
+| Period_Year        | Whole Number         | Recent year?                                           | Validate range.                                |
+| Rental_Income_USD  | Decimal Number       | Negatives? 0 means vacant?                             | Filter negatives.                              |
+| Occupancy_Status   | Text                 | Other statuses?                                        | Normalize values.                              |
+| Vacancy_Days       | Whole Number         | 0 for occupied?                                       | Validate/Filter.                               |
+| Derived Date       | Date                 | Combine `Period_Month` and `Period_Year`               | Create with Custom Column if needed.           |
+
+---
+
+### Table: Property_Expenses (Likely a Fact Table: `Fact_Property_Expenses`)
+
+| Column Name        | Data Type (Expected) | Questions & Observations                               | Action/Cleaning Strategy                       |
+|--------------------|----------------------|--------------------------------------------------------|------------------------------------------------|
+| Expense_ID         | Text                 | Unique?                                                | Remove duplicates.                             |
+| Property_ID        | Text                 | All IDs valid?                                         | Ensure validity.                               |
+| Expense_Date       | Date                 | Consistency                                            | Convert, validate.                             |
+| Expense_Type       | Text                 | Variations?                                            | Normalize categories.                          |
+| Amount_USD         | Decimal Number       | Negatives/zeros?                                       | Filter invalids.                               |
+| Vendor             | Text                 | Consistency?                                           | Normalize names.                               |
+
+---
+
+## Phase 3: Context and Validation (The "Why")
+
+### Documentation
+
+- Ideally:
+  - A "Property Master Data" document explaining Zoning codes (e.g., R1=Single Family Residential).
+  - List of standard `Property_Type` and `Expense_Type` categories.
+  - Definitions for `Transaction_Type` ("Acquisition" vs. "Sale").
+
+- **Action:** Refer to documents for validation and cleaning.
+
+### Ask a Subject Matter Expert (SME)
+
+- Property manager, investment analyst, or accounting team member.
+- Key questions:
+  - What constitutes a "good" Performance Ratio for a property?
+  - How do we classify different types of Repair expenses?
+  - Are Sq_Footage values always Gross or Net?
+  - Zoning types focus for investment?
+  - How are Vacancy_Days calculated?
+  - Expected frequency for Rental_Income records?
+  - What does it mean if Sale_Price_USD is 0?
+
+### Cross-Validation
+
+- Compare results with existing reports.
+- Calculate simple metrics (e.g., Total_Expenses_Year vs. Rental_Income_USD).
+
+---
+
+
+
