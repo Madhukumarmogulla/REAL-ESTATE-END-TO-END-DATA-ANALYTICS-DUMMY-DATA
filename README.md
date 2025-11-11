@@ -9,7 +9,7 @@
 
 * **Key Entities/Dimensions:** Property (address, type, size, features), Location (city, neighborhood, zip code), Time (transaction date, rental period), Tenant (demographics, lease terms), Market Condition (interest rates, unemployment).
 
-**Facts:** Sale Price, Rental Income, Acquisition Cost, Operating Expenses, Vacancy Rate, Property Value Appreciation.
+* **Facts:** Sale Price, Rental Income, Acquisition Cost, Operating Expenses, Vacancy Rate, Property Value Appreciation.
 
 * **Problem to Solve with DW:** Identifying undervalued properties, predicting rental income trends, analyzing the impact of market changes on property values, comparing property performance across regions/types, optimizing tenant acquisition strategies.
 
