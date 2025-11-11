@@ -1,0 +1,69 @@
+{
+  "Properties": [
+    {
+      "Property_ID": "P001",
+      "Property_Type": "Residential",
+      "Address": "123 Oak St",
+      "City": "San Diego",
+      "State": "CA",
+      "Zip_Code": "92101",
+      "Sq_Footage": 1500,
+      "Built_Year": 1998,
+      "Num_Bedrooms": 3,
+      "Num_Bathrooms": 2,
+      "Zoning": "R1"
+    },
+    {
+      "Property_ID": "P002",
+      "Property_Type": "Commercial",
+      "Address": "456 Main Ave",
+      "City": "Phoenix",
+      "State": "AZ",
+      "Zip_Code": "85001",
+      "Sq_Footage": 5000,
+      "Built_Year": 2005,
+      "Num_Bedrooms": 0,
+      "Num_Bathrooms": 2,
+      "Zoning": "C2"
+    },
+    {
+      "Property_ID": "P003",
+      "Property_Type": "Residential",
+      "Address": "789 Pine Ln",
+      "City": "Sacramento",
+      "State": "CA",
+      "Zip_Code": "95814",
+      "Sq_Footage": 1200,
+      "Built_Year": 1975,
+      "Num_Bedrooms": 2,
+      "Num_Bathrooms": 1,
+      "Zoning": "R1"
+    },
+    {
+      "Property_ID": "P004",
+      "Property_Type": "Residential",
+      "Address": "101 Maple Rd",
+      "City": "Austin",
+      "State": "TX",
+      "Zip_Code": "78701",
+      "Sq_Footage": 2000,
+      "Built_Year": 2010,
+      "Num_Bedrooms": 4,
+      "Num_Bathrooms": 3,
+      "Zoning": "R1"
+    },
+    {
+      "Property_ID": "P005",
+      "Property_Type": "Commercial",
+      "Address": "202 Market St",
+      "City": "Denver",
+      "State": "CO",
+      "Zip_Code": "80202",
+      "Sq_Footage": 8000,
+      "Built_Year": 1990,
+      "Num_Bedrooms": 0,
+      "Num_Bathrooms": 4,
+      "Zoning": "C1"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "Rentals": [
+    {
+      "Rental_ID": "R001",
+      "Property_ID": "P001",
+      "Period_Month": 1,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 2800.0,
+      "Occupancy_Status": "Occupied",
+      "Vacancy_Days": 0
+    },
+    {
+      "Rental_ID": "R002",
+      "Property_ID": "P001",
+      "Period_Month": 2,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 2800.0,
+      "Occupancy_Status": "Occupied",
+      "Vacancy_Days": 0
+    },
+    {
+      "Rental_ID": "R003",
+      "Property_ID": "P003",
+      "Period_Month": 1,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 2000.0,
+      "Occupancy_Status": "Occupied",
+      "Vacancy_Days": 0
+    },
+    {
+      "Rental_ID": "R004",
+      "Property_ID": "P002",
+      "Period_Month": 1,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 6000.0,
+      "Occupancy_Status": "Occupied",
+      "Vacancy_Days": 0
+    },
+    {
+      "Rental_ID": "R005",
+      "Property_ID": "P001",
+      "Period_Month": 9,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 0.0,
+      "Occupancy_Status": "Vacant",
+      "Vacancy_Days": 20
+    },
+    {
+      "Rental_ID": "R006",
+      "Property_ID": "P004",
+      "Period_Month": 10,
+      "Period_Year": 2023,
+      "Rental_Income_USD": 3500.0,
+      "Occupancy_Status": "Occupied",
+      "Vacancy_Days": 0
+    }
+  ]
+}

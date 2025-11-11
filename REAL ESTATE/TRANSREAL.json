@@ -1,0 +1,44 @@
+{
+  "Transactions": [
+    {
+      "Transaction_ID": "T001",
+      "Property_ID": "P001",
+      "Transaction_Date": "2019-05-20",
+      "Transaction_Type": "Acquisition",
+      "Sale_Price_USD": 550000.0,
+      "Buyer_Type": "Investor"
+    },
+    {
+      "Transaction_ID": "T002",
+      "Property_ID": "P003",
+      "Transaction_Date": "2020-01-15",
+      "Transaction_Type": "Acquisition",
+      "Sale_Price_USD": 380000.0,
+      "Buyer_Type": "Investor"
+    },
+    {
+      "Transaction_ID": "T003",
+      "Property_ID": "P004",
+      "Transaction_Date": "2021-03-01",
+      "Transaction_Type": "Acquisition",
+      "Sale_Price_USD": 720000.0,
+      "Buyer_Type": "Investor"
+    },
+    {
+      "Transaction_ID": "T004",
+      "Property_ID": "P001",
+      "Transaction_Date": "2023-08-10",
+      "Transaction_Type": "Sale",
+      "Sale_Price_USD": 680000.0,
+      "Buyer_Type": "Individual"
+    },
+    {
+      "Transaction_ID": "T005",
+      "Property_ID": "P002",
+      "Transaction_Date": "2022-06-25",
+      "Transaction_Type": "Acquisition",
+      "Sale_Price_USD": 1200000.0,
+      "Buyer_Type": "Investor"
+    }
+  ]
+}
