@@ -1,4 +1,4 @@
-#REAL-ESTATE-END-TO-END-DATA-ANALYTICS-DUMMY-DATA
+# REAL-ESTATE-END-TO-END-DATA-ANALYTICS-DUMMY-DATA
 ## Real Estate Industry: Enhancing Property Investment Analysis
 
 **Problem Statement:** "PropertyInsights Inc." is a real estate investment firm that acquires and manages residential and commercial properties. They need to improve their decision-making process for new property acquisitions and optimize the performance of their existing portfolio. Currently, data related to property listings, sales history, rental income, property expenses, tenant demographics, local economic indicators, and competitor activity is scattered across various spreadsheets, external market data providers, and legacy internal systems. This fragmentation makes it challenging to conduct comprehensive market analysis, assess investment risks, identify profitable acquisition targets, and benchmark property performance effectively.
