@@ -5,7 +5,7 @@
 
 ## Data Warehouse & Database Design Considerations:
 
-#### * Source Systems: MLS data feeds, public records, internal accounting software, property management systems, demographic data APIs, competitor analysis reports.
+* Source Systems:*  MLS data feeds, public records, internal accounting software, property management systems, demographic data APIs, competitor analysis reports.
 
 #### * Key Entities/Dimensions: Property (address, type, size, features), Location (city, neighborhood, zip code), Time (transaction date, rental period), Tenant (demographics, lease terms), Market Condition (interest rates, unemployment).
 
